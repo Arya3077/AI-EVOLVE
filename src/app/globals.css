@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-navy: #103C63;
+    --color-cream: #EBE9DC;
+    --color-orange: #FF7F00;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+
+    --background: #FFFFFF;
+    --foreground: #0A0F14;
+
+    --primary: #103C63;
+    --primary-foreground: #FFFFFF;
+
+    --accent: #FF7F00;
+    --accent-foreground: #FFFFFF;
+
+    --card: #FFFFFF;
+    --card-foreground: #0A0F14;
+
+    --muted: #EBE9DC;
+    --muted-foreground: #4A5568;
+
+    --border: rgba(16, 60, 99, 0.18);
+    --input-border: rgba(16, 60, 99, 0.3);
+
+    --radius: 1.5rem;
+
+    --font-alkia: "Alkia", "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .dark {
+    --background: #000000;
+    --foreground: #F1F5F9;
+
+    --primary: #103C63;
+    --primary-foreground: #FFFFFF;
+
+    --accent: #FF7F00;
+    --accent-foreground: #FFFFFF;
+
+    --card: #0D1117;
+    --card-foreground: #F1F5F9;
+
+    --muted: #161B22;
+    --muted-foreground: #94A3B8;
+
+    --border: rgba(255, 255, 255, 0.15);
+    --input-border: rgba(255, 255, 255, 0.25);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-space-grotesk), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background-color: var(--color-orange);
+  color: #FFFFFF;
+}
+
+/* Hide scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tech Myrmidons Inspired Layered Background Patterns */
+.bg-tech-grid {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(16, 60, 99, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 60, 99, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-tech-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.bg-dots-pattern {
+  background-image: radial-gradient(rgba(16, 60, 99, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .bg-dots-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+}
+
+/* Typography System: Alkia strictly for display headings */
+.editorial-heading,
+.font-alkia,
+h1,
+h2 {
+  font-family: var(--font-alkia);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+/* Supporting Sans-Serif font for UI body, nav, buttons, metadata */
+.font-sans,
+.font-mono,
+p,
+span,
+button,
+a,
+input {
+  font-family: var(--font-space-grotesk), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Custom Reusable Component Classes */
+.container-custom {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.section-padding {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  background-color: var(--color-navy);
+  color: #FFFFFF;
+  border: 1px solid var(--color-navy);
+  border-radius: 9999px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.dark .btn-primary {
+  background-color: var(--color-orange);
+  color: #000000;
+  border-color: var(--color-orange);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(16, 60, 99, 0.35);
+}
+
+.dark .btn-primary:hover {
+  box-shadow: 0 4px 14px rgba(255, 127, 0, 0.4);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  background-color: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-navy);
+  background-color: rgba(16, 60, 99, 0.06);
+  transform: translateY(-2px);
+}
+
+.dark .btn-secondary:hover {
+  border-color: var(--color-orange);
+  background-color: rgba(255, 127, 0, 0.1);
+}
+
+.card-custom {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.card-hover:hover {
+  border-color: var(--color-navy);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(16, 60, 99, 0.15);
+}
+
+.dark .card-hover:hover {
+  border-color: var(--color-orange);
+  box-shadow: 0 16px 32px -8px rgba(255, 127, 0, 0.2);
+}
