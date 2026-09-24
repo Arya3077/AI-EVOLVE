@@ -27,39 +27,26 @@ export function CTA() {
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left Column: Oversized Typography & Message */}
-            <div className="lg:col-span-7 space-y-8">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF7F00] bg-[#FF7F00]/20 border border-[#FF7F00]/40 px-3 py-1 rounded-full">
-                  05 / JOIN THE COMMUNITY
-                </span>
-                <span className="font-mono text-xs text-white/60 hidden sm:inline-block">
-                  SYS.INIT // NEXT_PHASE
-                </span>
-              </div>
+        {/* Left Column: Typography & Message */}
+<div className="lg:col-span-7 space-y-6">
+  <h2 className="editorial-heading text-4xl sm:text-5xl lg:text-6xl text-white font-black leading-none tracking-tight">
+    READY TO
+    <br />
+    BUILD
+    <br />
+    <span className="text-[#FF7F00]">SOMETHING?</span>
+  </h2>
 
-              <h2 className="editorial-heading text-5xl sm:text-7xl lg:text-8xl text-white font-black leading-none tracking-tight">
-                READY TO
-                <br />
-                BUILD
-                <br />
-                <span className="text-[#FF7F00]">SOMETHING?</span>
-              </h2>
+  <p className="text-lg sm:text-xl text-white/90 max-w-xl font-medium leading-relaxed">
+    There are people building things. There are events happening. There are
+    things to learn.{" "}
+    <span className="text-[#FF7F00] font-bold">
+      Now become part of it.
+    </span>
+  </p>
 
-              <p className="text-xl sm:text-2xl text-white/90 max-w-xl font-medium leading-relaxed">
-                There are people building things. There are events happening. There are things to learn. <span className="text-[#FF7F00] font-bold">Now become part of it.</span>
-              </p>
-
-              {/* Bullet Highlights */}
-              <div className="space-y-3 pt-2 font-mono text-sm text-white/80">
-                {HIGHLIGHTS.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#FF7F00] shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+  
+</div>
 
             {/* Right Column: Poster Action Card & Primary Join Button */}
             <div className="lg:col-span-5 flex justify-center lg:justify-end">

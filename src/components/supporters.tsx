@@ -13,9 +13,6 @@ export function Supporters() {
       <div className="container-custom space-y-10">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <div className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF7F00]">
-            04 / NETWORK ECOSYSTEM
-          </div>
           <h2 className="editorial-heading text-3xl sm:text-4xl text-foreground font-black">
             COMMUNITY SUPPORTED BY
           </h2>

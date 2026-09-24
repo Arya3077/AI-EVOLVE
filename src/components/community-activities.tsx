@@ -1,95 +1,120 @@
-import { Code, Presentation, Layers, Users, Sparkles } from "lucide-react";
+import {
+  Code,
+  Presentation,
+  Layers,
+  Users,
+  Sparkles,
+} from "lucide-react";
 
 const ACTIVITIES = [
   {
     num: "01",
     icon: Code,
     title: "WORKSHOPS",
-    subtitle: "Learn by building.",
-    desc: "Interactive technical labs where developers build AI agents, fine-tune models, and deploy local runtimes.",
+    subtitle: "LEARN BY BUILDING",
+    desc: "Interactive technical labs where developers build AI agents, experiment with models, and deploy working projects.",
+    aspect: "lg:col-span-4",
+    theme: "bg-[#103C63] text-white border-[#103C63]",
   },
   {
     num: "02",
     icon: Presentation,
     title: "TALKS & DEMOS",
-    subtitle: "Learn from people working in the field.",
-    desc: "No pitch decks. 10-minute live demonstrations of working software and production LLM architectures.",
+    subtitle: "LEARN FROM BUILDERS",
+    desc: "Live sessions, technical talks, and working demonstrations from people building in the field.",
+    aspect: "lg:col-span-4",
+    theme: "bg-[#FF7F00] text-black border-[#FF7F00]",
   },
   {
     num: "03",
     icon: Layers,
     title: "OPEN PROJECTS",
-    subtitle: "Build and experiment together.",
-    desc: "Collaborative repositories, benchmark datasets, and open-source agent toolkits built by community teams.",
+    subtitle: "BUILD TOGETHER",
+    desc: "Collaborative projects, experiments, repositories, and open-source tools created by the community.",
+    aspect: "lg:col-span-4",
+    theme: "bg-card text-foreground border-border",
   },
   {
     num: "04",
     icon: Users,
     title: "MEETUPS",
-    subtitle: "Meet people curious about the same things.",
-    desc: "Casual technical gatherings to discuss multi-agent systems, WebGPU inference, and production scaling.",
+    subtitle: "MEET CURIOUS PEOPLE",
+    desc: "Small gatherings to exchange ideas, discuss technology, and meet people working on similar problems.",
+    aspect: "lg:col-span-6",
+    theme: "bg-[#103C63] text-white border-[#103C63]",
   },
   {
     num: "05",
     icon: Sparkles,
     title: "COLLABORATION",
-    subtitle: "Find people to build with.",
-    desc: "Connect with co-founders, research collaborators, and fellow software engineers shipping AI apps.",
+    subtitle: "FIND PEOPLE TO BUILD WITH",
+    desc: "Connect with developers, researchers, founders, and creators looking for people to experiment and build with.",
+    aspect: "lg:col-span-6",
+    theme: "bg-card text-foreground border-border",
   },
 ];
 
 export function CommunityActivities() {
   return (
-    <section className="section-padding bg-[#EBE9DC] text-[#0A0F14] dark:bg-[#0D1117] dark:text-[#F1F5F9] relative overflow-hidden">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-tech-grid opacity-30 pointer-events-none" />
-
-      <div className="container-custom relative z-10 space-y-12">
+    <section className="relative overflow-hidden bg-[#EBE9DC] text-black dark:bg-black dark:text-white">
+      <div className="container-custom section-padding relative z-10 space-y-10">
         {/* Header */}
-        <div className="space-y-3">
-          <div className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF7F00]">
-            03 / COMMUNITY ACTIVITIES
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-2">
+
+            <h2 className="editorial-heading text-3xl sm:text-4xl lg:text-5xl font-black leading-[0.95] tracking-tight">
+              WHAT DOES THE
+              <br />
+              <span className="text-[#FF7F00]">COMMUNITY DO?</span>
+            </h2>
           </div>
-          <h2 className="editorial-heading text-4xl sm:text-6xl md:text-7xl font-black leading-none">
-            WHAT DOES THE
-            <br />
-            <span className="text-[#FF7F00]">COMMUNITY DO?</span>
-          </h2>
         </div>
 
-        {/* 5 Activity Poster Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ACTIVITIES.map((act) => {
-            const Icon = act.icon;
+        {/* Two-row asymmetric grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          {ACTIVITIES.map((activity) => {
+            const Icon = activity.icon;
+
             return (
-              <div
-                key={act.num}
-                className="p-8 bg-white/80 dark:bg-card/80 backdrop-blur-md border-2 border-border/80 rounded-[24px] space-y-4 flex flex-col justify-between hover:border-[#FF7F00] transition-colors duration-300 group shadow-sm"
+              <article
+                key={activity.num}
+                className={`${activity.aspect} group relative min-h-[250px] overflow-hidden rounded-[24px] border p-7 sm:p-8 flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 ${activity.theme}`}
               >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between border-b border-border/60 pb-3">
-                    <span className="font-mono text-2xl font-black text-[#FF7F00]">
-                      {act.num}
+                {/* Technical grid */}
+                <div className="absolute inset-0 bg-tech-grid opacity-[0.12] pointer-events-none" />
+
+                {/* Top metadata */}
+                <div className="relative z-10 flex items-center justify-between border-b border-current/20 pb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-lg font-bold">
+                      {activity.num}
                     </span>
-                    <div className="p-2 rounded-full bg-[#103C63] text-white dark:bg-[#FF7F00] dark:text-black">
-                      <Icon className="w-4 h-4" />
-                    </div>
+
                   </div>
 
-                  <div>
-                    <h3 className="editorial-heading text-2xl font-black uppercase text-foreground group-hover:text-[#FF7F00] transition-colors">
-                      {act.title}
-                    </h3>
-                    <div className="font-mono text-xs font-bold text-[#FF7F00] mt-1">
-                      {act.subtitle}
-                    </div>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-current/10">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                </div>
+
+                {/* Main content */}
+                <div className="relative z-10 mt-10 max-w-2xl">
+                  <div className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] opacity-70">
+                    {activity.subtitle}
                   </div>
 
-                  <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
-                    {act.desc}
+                  <h3 className="editorial-heading mt-2 text-2xl sm:text-3xl font-black leading-[0.95] tracking-tight">
+                    {activity.title}
+                  </h3>
+
+                  <p className="mt-4 max-w-xl text-xs sm:text-sm leading-relaxed opacity-75">
+                    {activity.desc}
                   </p>
                 </div>
-              </div>
+
+                {/* Hover accent */}
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-current transition-all duration-300 group-hover:w-full" />
+              </article>
             );
           })}
         </div>
