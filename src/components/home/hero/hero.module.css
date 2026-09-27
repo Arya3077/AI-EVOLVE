@@ -1,0 +1,45 @@
+/* ------------------------------------------------------------------
+   Hero — scoped styles only.
+
+   The design system for this section is the token set in
+   `app/globals.css` (`--bg`, `--text`, `--accent`, `--accent-secondary`,
+   `--bg-block`, `--border`). Nothing here hardcodes a colour, and no rule
+   here is theme-specific: switching `data-theme` on <html> re-themes the
+   hero with no markup or structural change.
+
+   Deliberately little: one display-type override and two decorative
+   shapes. The previous revision of this file carried planets, orbital
+   arcs and their drift keyframes; the current direction is minimal, so
+   all of that is gone.
+   ------------------------------------------------------------------ */
+
+/* --- Display type ----------------------------------------------------------
+   The global `h1` rule is an unlayered element selector that forces
+   uppercase and the Alkia stack. This section needs sentence case and the
+   real loaded face, so the override lives in a scoped class where it
+   outranks that selector. */
+.display {
+  font-family: var(--font-space-grotesk), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  text-transform: none;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+/* --- Colour blocks ---------------------------------------------------------
+   The soft rectangles that give the section depth. Positioned per-instance
+   with Tailwind; only the fill and the edge softening live here.
+
+   The blur is small on purpose. A heavy blur turns a block into a glow and
+   the grid of rectangles in the reference disappears; a few pixels just
+   takes the hard edge off. */
+.block {
+  position: absolute;
+  background-color: var(--bg-block);
+  filter: blur(3px);
+}
+
+/* --- Sparkle twinkle -------------------------------------------------------
+   `.twinkle` now lives in `components/page-backdrop.module.css`, which the
+   hero also imports — one copy, owned by whichever component needs it most. */
+

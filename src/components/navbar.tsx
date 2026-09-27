@@ -12,110 +12,125 @@ const NAV_LINKS = [
   { href: "/resources", label: "Resources" },
   { href: "/events", label: "Events" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/contact", label: "Contact" },
 ];
 
+/* Every colour resolves through a token, so `data-theme` on <html> re-themes
+   the bar with no markup change. The bottom border is deliberately 1px and
+   low-contrast — it separates the bar from the page, it does not announce
+   itself. */
 export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [prevPathname, setPrevPathname] = React.useState(pathname);
 
-  // Close mobile menu during render when route changes
+  // Close mobile menu during render on route change
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
     setMobileMenuOpen(false);
   }
 
   return (
-    <div className="w-full px-4 sm:px-6 py-4">
-      <header className="max-w-6xl mx-auto bg-background/80 backdrop-blur-md rounded-full px-5 sm:px-8 py-3 transition-colors duration-200 flex items-center justify-between gap-4">
-        
-        {/* Brand Logo */}
+    <header className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--bg)]">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-5 py-3.5 sm:px-6">
+        {/* Brand */}
         <Link
           href="/"
-          className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full"
+          aria-label="AI Evolve — home"
+          className="shrink-0 rounded-sm text-[var(--text)] transition-opacity duration-200 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
         >
-          <Logo className="h-6 sm:h-7 w-auto text-foreground group-hover:opacity-90 transition-opacity" />
+          <Logo className="h-6 w-auto sm:h-7" />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        {/* Desktop links. The gap steps up with the viewport (16px at `md`,
+            24px at `lg`, 28px at `xl`) because five links plus the pill is
+            genuinely tight at 768px — at a flat 28px the row overflowed the
+            viewport by 4px and produced a horizontal scrollbar. `whitespace-nowrap`
+            on each link and on the pill keeps every label on one line. */}
+        <nav
+          className="hidden items-center gap-4 md:flex lg:gap-6 xl:gap-7"
+          aria-label="Main navigation"
+        >
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-xs font-mono font-extrabold uppercase tracking-wider transition-colors relative py-1 ${
+                aria-current={isActive ? "page" : undefined}
+                className={`relative whitespace-nowrap py-1 text-sm font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] ${
                   isActive
-                    ? "text-[#FF7F00]"
-                    : "text-foreground/80 hover:text-foreground"
+                    ? "text-[var(--accent)]"
+                    : "text-[var(--text-muted)] hover:text-[var(--text)]"
                 }`}
               >
                 {link.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FF7F00] rounded-full" />
-                )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          
           <Link
             href="/#join"
-            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#FF7F00] text-black hover:bg-[#FF7F00]/90 font-mono text-xs font-black uppercase tracking-wider shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[var(--accent)] px-4 py-2.5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:px-5"
           >
-            <span>JOIN US</span>
-            <ArrowUpRight className="w-4 h-4" />
+            Join us
+            <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
 
         {/* Mobile controls */}
-        <div className="flex items-center gap-2.5 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? "Close menu" : "Open navigation menu"}
-            className="p-2 text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full"
+            aria-expanded={mobileMenuOpen}
+            className="grid h-9 w-9 place-items-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:text-[var(--text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
-      </header>
+      </div>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 max-w-6xl mx-auto bg-background p-6 rounded-[24px] shadow-xl space-y-4 animate-in fade-in slide-in-from-top-3 duration-200">
-          <nav className="flex flex-col space-y-3" aria-label="Mobile navigation">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-mono font-bold uppercase tracking-wider py-2 border-b border-border/40 ${
-                  pathname === link.href ? "text-[#FF7F00]" : "text-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="pt-2">
+        <div className="border-t border-[var(--border)] bg-[var(--bg)] md:hidden">
+          <nav
+            className="mx-auto flex w-full max-w-6xl flex-col px-5 py-4 sm:px-6"
+            aria-label="Mobile navigation"
+          >
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`border-b border-[var(--border)] py-3 text-sm font-medium transition-colors ${
+                    isActive
+                      ? "text-[var(--accent)]"
+                      : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/#join"
-              className="w-full py-3 px-5 rounded-full bg-[#FF7F00] text-black font-mono font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md"
-              onClick={() => setMobileMenuOpen(false)}
+              className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             >
-              <span>JOIN US</span>
-              <ArrowUpRight className="w-4 h-4" />
+              Join us
+              <ArrowUpRight className="h-4 w-4" />
             </Link>
-          </div>
+          </nav>
         </div>
       )}
-    </div>
+    </header>
   );
 }

@@ -1,4 +1,10 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Code, Terminal, FileText, Cpu, Layers } from "lucide-react";
+
+import { PageBackdrop } from "@/components/page-backdrop";
+import { cardIn, fadeUp } from "@/lib/motion";
 
 const RESOURCES = [
   {
@@ -39,46 +45,61 @@ const RESOURCES = [
 ];
 
 export default function ResourcesPage() {
+  const reduced = useReducedMotion() === true;
+  const fades = fadeUp(reduced);
+  const cards = cardIn(reduced);
+
   return (
-    <div className="section-padding bg-background min-h-screen">
+    <div className="section-padding relative isolate min-h-screen overflow-hidden bg-[var(--bg)]">
+      <PageBackdrop />
       <div className="container-custom space-y-12">
         {/* Page Title */}
-        <div className="border-b border-border pb-10 space-y-4">
-          <div className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF7F00]">
+        <motion.div
+          className="space-y-4 border-b border-[var(--border)] pb-10"
+          custom={0.1}
+          variants={fades}
+          initial="hidden"
+          animate="visible"
+        >
+          <div className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--accent)]">
             [ BUILDER KNOWLEDGE & TOOLKITS ]
           </div>
-          <h1 className="editorial-heading text-5xl sm:text-6xl md:text-7xl text-foreground font-black">
+          <h1 className="editorial-heading text-5xl font-black text-[var(--text)] sm:text-6xl md:text-7xl">
             COMMUNITY RESOURCES
           </h1>
-          <p className="text-lg text-foreground/80 max-w-2xl">
+          <p className="max-w-2xl text-lg text-[var(--text-muted)]">
             Open-source starter templates, evaluation benchmarks, architecture guides, and agent orchestration scripts shared freely by AI Evolve builders.
           </p>
-        </div>
+        </motion.div>
 
         {/* Resources Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {RESOURCES.map((res, idx) => {
             const Icon = res.icon;
             return (
-              <div
+              <motion.div
                 key={idx}
-                className="p-8 border-2 border-border bg-card rounded-[24px] space-y-5 flex flex-col justify-between hover:border-[#FF7F00] transition-colors duration-200 group"
+                custom={idx}
+                variants={cards}
+                initial="hidden"
+                animate="visible"
+                className="group flex flex-col justify-between space-y-5 rounded-[24px] border-2 border-[var(--border)] bg-[var(--bg)] p-8 transition-colors duration-200 hover:border-[var(--accent)]"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-[#103C63] text-white dark:bg-[#FF7F00] dark:text-black rounded-full">
+                    <span className="rounded-full bg-[var(--accent)] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-white">
                       {res.category}
                     </span>
-                    <div className="p-2 rounded-full bg-muted">
-                      <Icon className="w-4 h-4 text-foreground" />
+                    <div className="rounded-full bg-[var(--bg-block)] p-2">
+                      <Icon className="h-4 w-4 text-[var(--text-muted)]" />
                     </div>
                   </div>
 
-                  <h3 className="font-extrabold text-xl tracking-tight text-foreground group-hover:text-[#FF7F00] transition-colors">
+                  <h3 className="text-xl font-extrabold tracking-tight text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
                     {res.title}
                   </h3>
 
-                  <p className="text-sm text-foreground/75 leading-relaxed font-sans">
+                  <p className="font-sans text-sm leading-relaxed text-[var(--text-muted)]">
                     {res.desc}
                   </p>
                 </div>
@@ -87,12 +108,12 @@ export default function ResourcesPage() {
                   href={res.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between py-3 px-5 border border-border rounded-full font-mono text-xs font-bold uppercase tracking-wider text-foreground group-hover:bg-[#FF7F00] group-hover:text-black group-hover:border-[#FF7F00] transition-all"
+                  className="inline-flex items-center justify-between rounded-full border border-[var(--border)] px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[var(--text)] transition-colors duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                 >
                   <span>VIEW REPOSITORY</span>
-                  <ArrowUpRight className="w-4 h-4" />
+                  <ArrowUpRight className="h-4 w-4" />
                 </a>
-              </div>
+              </motion.div>
             );
           })}
         </div>

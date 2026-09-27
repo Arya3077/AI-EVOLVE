@@ -29,9 +29,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${spaceGrotesk.variable} antialiased h-full`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground bg-tech-grid relative">
+      <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--text)] relative">
         <ThemeProvider
-          attribute="class"
+          attribute="data-theme"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange

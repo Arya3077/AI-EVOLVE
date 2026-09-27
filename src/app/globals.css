@@ -1,5 +1,50 @@
 @import "tailwindcss";
 
+/* Theme switching is driven by the attribute `ThemeProvider` writes on <html>.
+
+   Both `.dark` and `[data-theme="dark"]` are matched on purpose. The provider
+   writes `data-theme`, but a tab that was already open when that changed can
+   still be carrying the old `class="dark"` (Fast Refresh keeps the mounted
+   provider, and the markup is cached). Listening to both means a stale tab
+   still themes correctly instead of looking like a dead toggle. */
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+/* ------------------------------------------------------------------
+   Design tokens — the single source of truth for the hero + navbar.
+
+   Defined unlayered so they always win over the legacy `--accent` /
+   `--border` values further down this file, and so no cascade layer can
+   accidentally shadow them. Components reference these with `var(--token)`
+   and never hardcode a hex value, so setting `data-theme="dark"` on the
+   root re-themes the page.
+
+   The legacy `--background` / `--foreground` pair stays for the sections
+   that still read it; `body` is repointed at `--bg` / `--text` below so
+   the page and the new surfaces agree.
+   ------------------------------------------------------------------ */
+:root {
+  --bg: #f7f5f2;
+  --bg-block: #f0dfd9;
+  --text: #15131c;
+  --text-muted: #5c5866;
+  --accent: #ff6a2b;
+  --accent-secondary: #8b5cf6;
+  --border: #ececec;
+}
+
+/* `.dark` is listed alongside `[data-theme="dark"]` for the same reason as the
+   variant above: a tab still carrying the legacy class must theme correctly. */
+.dark,
+[data-theme="dark"] {
+  --bg: #0a0a0e;
+  --bg-block: #17121f;
+  --text: #f5f4f7;
+  --text-muted: #9a96a3;
+  --accent: #ff8a4c;
+  --accent-secondary: #a78bfa;
+  --border: #211c29;
+}
+
 @layer base {
   :root {
     --color-navy: #103C63;
@@ -14,16 +59,12 @@
     --primary: #103C63;
     --primary-foreground: #FFFFFF;
 
-    --accent: #FF7F00;
-    --accent-foreground: #FFFFFF;
-
     --card: #FFFFFF;
     --card-foreground: #0A0F14;
 
     --muted: #EBE9DC;
     --muted-foreground: #4A5568;
 
-    --border: rgba(16, 60, 99, 0.18);
     --input-border: rgba(16, 60, 99, 0.3);
 
     --radius: 1.5rem;
@@ -31,15 +72,15 @@
     --font-alkia: "Alkia", "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  .dark {
+  /* Both selectors: `data-theme` is what the provider writes, `.dark` is kept
+     so anything that sets the class directly still themes correctly. */
+  .dark,
+  [data-theme="dark"] {
     --background: #000000;
     --foreground: #F1F5F9;
 
     --primary: #103C63;
     --primary-foreground: #FFFFFF;
-
-    --accent: #FF7F00;
-    --accent-foreground: #FFFFFF;
 
     --card: #0D1117;
     --card-foreground: #F1F5F9;
@@ -47,7 +88,6 @@
     --muted: #161B22;
     --muted-foreground: #94A3B8;
 
-    --border: rgba(255, 255, 255, 0.15);
     --input-border: rgba(255, 255, 255, 0.25);
   }
 }
@@ -57,8 +97,8 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg);
+  color: var(--text);
   font-family: var(--font-space-grotesk), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   transition: background-color 0.25s ease, color 0.25s ease;
   min-height: 100vh;

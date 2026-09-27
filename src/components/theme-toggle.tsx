@@ -23,9 +23,9 @@ export function ThemeToggle() {
       <button
         type="button"
         aria-label="Toggle theme"
-        className="relative p-2 text-foreground/80 hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full"
+        className="relative grid h-9 w-9 place-items-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
       >
-        <span className="w-5 h-5 block opacity-0" />
+        <span className="w-4 h-4 block opacity-0" />
       </button>
     );
   }
@@ -37,12 +37,12 @@ export function ThemeToggle() {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className="relative p-2.5 text-foreground/80 hover:text-foreground transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full group"
+      className="relative grid h-9 w-9 place-items-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] group"
     >
       {isDark ? (
-        <Sun className="w-4 h-4 text-[#FF7F00] transition-transform duration-300 group-hover:rotate-45" />
+        <Sun className="h-4 w-4 text-[var(--accent)] transition-transform duration-300 group-hover:rotate-45" />
       ) : (
-        <Moon className="w-4 h-4 text-[#103C63] transition-transform duration-300 group-hover:-rotate-12" />
+        <Moon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12" />
       )}
     </button>
   );

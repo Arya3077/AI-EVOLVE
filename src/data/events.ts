@@ -16,22 +16,7 @@ export interface EventItem {
 }
 
 export const UPCOMING_EVENTS: EventItem[] = [
-  {
-    id: "evt-1",
-    month: "JUNE",
-    day: "26",
-    year: "2026",
-    time: "3:00 PM - 7:00 PM",
-    category: "MEETUP",
-    title: "INSIDE THE NETRA A2000 SDK",
-    description: "A technical walkthrough of the SDK architecture, model optimization, and Edge AI deployment.",
-    location: "Trivandrum",
-    format: "IN-PERSON",
-    speaker: "Jyothis Indirabhai",
-    speakerRole: "CEO, Netrasemi",
-    featured: true,
-    bannerTheme: "navy",
-  },
+  
   {
     id: "evt-2",
     month: "JULY",
@@ -79,6 +64,23 @@ export const UPCOMING_EVENTS: EventItem[] = [
     speakerRole: "Community Mentors",
     featured: true,
     bannerTheme: "cream",
+  },
+
+   {
+    id: "evt-1",
+    month: "JUNE",
+    day: "26",
+    year: "2026",
+    time: "3:00 PM - 7:00 PM",
+    category: "MEETUP",
+    title: "INSIDE THE NETRA A2000 SDK",
+    description: "A technical walkthrough of the SDK architecture, model optimization, and Edge AI deployment.",
+    location: "Trivandrum",
+    format: "IN-PERSON",
+    speaker: "Jyothis Indirabhai",
+    speakerRole: "CEO, Netrasemi",
+    featured: true,
+    bannerTheme: "navy",
   },
   
 ];

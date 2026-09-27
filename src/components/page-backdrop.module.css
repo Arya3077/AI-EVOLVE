@@ -1,0 +1,33 @@
+/* ------------------------------------------------------------------
+   Page backdrop — shared by every inner page.
+
+   `.twinkle` is owned here rather than in the hero's module because both the
+   hero and the backdrops need it; keeping one copy is the point of extracting
+   this component at all.
+   ------------------------------------------------------------------ */
+
+.twinkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-twinkle 7s ease-in-out infinite;
+}
+
+@keyframes hero-twinkle {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translate3d(0, 0, 0) scale(0.88) rotate(-5deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(0, -4px, 0) scale(1.08) rotate(5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twinkle {
+    animation: none;
+    opacity: 0.9;
+    transform: none;
+  }
+}
