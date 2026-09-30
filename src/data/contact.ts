@@ -22,8 +22,8 @@ export const CONTACT_CHANNELS: ContactChannel[] = [
   {
     id: "github",
     label: "GitHub",
-    handle: "github.com/aievolve", // TODO: real org
-    href: "https://github.com", // TODO: real org URL
+    handle: "github.com/The-Purple-Movement/Beyond-Borders",
+    href: "https://github.com/The-Purple-Movement/Beyond-Borders",
     kind: "external",
   },
   {
@@ -36,8 +36,8 @@ export const CONTACT_CHANNELS: ContactChannel[] = [
   {
     id: "whatsapp",
     label: "WhatsApp",
-    handle: "Community group", // TODO: real invite link
-    href: "https://whatsapp.com", // TODO: real invite link
+    handle: "Join the community group",
+    href: "https://chat.whatsapp.com/LewBKchX7amCBBWIKqHDGv",
     kind: "external",
   },
 ];

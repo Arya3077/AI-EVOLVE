@@ -99,9 +99,9 @@ export function CommunityActivities() {
         >
           <div className="space-y-2">
             <h2 className="editorial-heading text-3xl font-black leading-[0.95] tracking-tight sm:text-4xl lg:text-5xl">
-              WHAT DOES THE
+              WHAT DO
               <br />
-              <span className="text-[#FF7F00]">COMMUNITY DO?</span>
+              <span className="text-[#FF7F00]">WE DO?</span>
             </h2>
           </div>
         </motion.div>

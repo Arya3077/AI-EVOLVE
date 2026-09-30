@@ -19,12 +19,9 @@ export function GalleryCard({
   const cardRef = React.useRef<HTMLButtonElement>(null);
   const [isRevealed, setIsRevealed] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-
-  React.useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mq.matches);
-  }, []);
+  const [prefersReducedMotion] = React.useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   // Intersection Observer for scroll reveal
   React.useEffect(() => {
@@ -32,8 +29,8 @@ export function GalleryCard({
     if (!el) return;
 
     if (prefersReducedMotion) {
-      setIsRevealed(true);
-      return;
+      const frame = requestAnimationFrame(() => setIsRevealed(true));
+      return () => cancelAnimationFrame(frame);
     }
 
     let timer: ReturnType<typeof setTimeout>;

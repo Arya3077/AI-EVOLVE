@@ -1,48 +1,11 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Code, Terminal, FileText, Cpu, Layers } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { PageBackdrop } from "@/components/page-backdrop";
 import { cardIn, fadeUp } from "@/lib/motion";
-
-const RESOURCES = [
-  {
-    category: "STARTER TEMPLATE",
-    title: "Next.js 16 + React 19 Autonomous Agent Starter",
-    desc: "Pre-configured template with tool calling, streaming responses, and local eval logging.",
-    icon: Code,
-    link: "https://github.com",
-  },
-  {
-    category: "BENCHMARK & EVALS",
-    title: "Deterministic Evals Suite for Non-Deterministic Output",
-    desc: "Python testing harness to measure LLM function accuracy, latency distribution, and token cost.",
-    icon: Terminal,
-    link: "https://github.com",
-  },
-  {
-    category: "EDGE & ON-DEVICE",
-    title: "WebGPU Local Small Model Inference Lab",
-    desc: "Zero-server browser runtime running quantized 3B models directly on client GPUs.",
-    icon: Cpu,
-    link: "https://github.com",
-  },
-  {
-    category: "ARCHITECTURE GUIDE",
-    title: "Production RAG Indexing & Vector Search Blueprint",
-    desc: "Comprehensive guide on hybrid BM25 + dense vector indexing and re-ranking algorithms.",
-    icon: FileText,
-    link: "https://github.com",
-  },
-  {
-    category: "TOOLKIT",
-    title: "Multi-Agent Orchestration & Communication Bus",
-    desc: "Lightweight pub/sub bus for coordinating asynchronous AI worker agents.",
-    icon: Layers,
-    link: "https://github.com",
-  },
-];
+import { RESOURCES } from "@/data/resources";
 
 export default function ResourcesPage() {
   const reduced = useReducedMotion() === true;
@@ -68,7 +31,7 @@ export default function ResourcesPage() {
             COMMUNITY RESOURCES
           </h1>
           <p className="max-w-2xl text-lg text-[var(--text-muted)]">
-            Open-source starter templates, evaluation benchmarks, architecture guides, and agent orchestration scripts shared freely by AI Evolve builders.
+            Explore companies and find their problem statements to build, test, and ship practical AI solutions.
           </p>
         </motion.div>
 
@@ -96,21 +59,21 @@ export default function ResourcesPage() {
                   </div>
 
                   <h3 className="text-xl font-extrabold tracking-tight text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
-                    {res.title}
+                    {res.companyName}
                   </h3>
 
                   <p className="font-sans text-sm leading-relaxed text-[var(--text-muted)]">
-                    {res.desc}
+                    {res.companyDescription}
                   </p>
                 </div>
 
                 <a
-                  href={res.link}
+                  href={res.githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-between rounded-full border border-[var(--border)] px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[var(--text)] transition-colors duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                 >
-                  <span>VIEW REPOSITORY</span>
+                  <span>VIEW PROBLEM STATEMENTS</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </motion.div>
