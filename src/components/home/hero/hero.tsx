@@ -196,7 +196,7 @@ export function Hero() {
         >
           {/* Primary — solid accent, white label, arrow in a circular badge. */}
           <MotionLink
-            href="/events"
+            href="/resources"
             whileHover={reduced ? undefined : { y: -2 }}
             whileTap={reduced ? undefined : { scale: 0.97 }}
             transition={SPRING}
@@ -205,7 +205,7 @@ export function Hero() {
             <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/25 transition-transform duration-300 group-hover:translate-x-0.5">
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
-            Explore events
+            Explore Signals
           </MotionLink>
 
           {/* Secondary — outline only, transparent, label in the theme's own
