@@ -165,7 +165,7 @@ export function CTA() {
 
                 <div className="space-y-3 pt-2">
                   <motion.a
-                    href="https://discord.gg"
+                    href="https://chat.whatsapp.com/LewBKchX7amCBBWIKqHDGv"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ y: -3, scale: 1.015 }}

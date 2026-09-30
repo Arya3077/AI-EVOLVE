@@ -168,7 +168,7 @@ export function Hero() {
             initial="hidden"
             animate="visible"
           >
-            with the AI community
+            with AI Evolve
           </motion.span>
         </h1>
 
@@ -181,9 +181,8 @@ export function Hero() {
           initial="hidden"
           animate="visible"
         >
-          Developers and tinkerers building with agents, local models and production
-          LLMs — through workshops and{" "}
-          <span className="whitespace-nowrap">open-source</span> projects.
+          Signals from companies, global access, and the support to build and ship
+          beyond borders.
         </motion.p>
 
         {/* 3. CTA row. Stacked below `sm` so the primary pill never has to
@@ -212,7 +211,7 @@ export function Hero() {
           {/* Secondary — outline only, transparent, label in the theme's own
               text colour. */}
           <Link
-            href="/#join"
+            href="https://chat.whatsapp.com/LewBKchX7amCBBWIKqHDGv"
             className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--text)] transition-colors duration-300 hover:bg-[var(--accent)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:px-7 sm:py-3.5 sm:text-base"
           >
             Join community
