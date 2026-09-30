@@ -22,15 +22,16 @@ export function GalleryLightbox({
   const [isVisible, setIsVisible] = React.useState(false);
   const [isImageTransitioning, setIsImageTransitioning] = React.useState(false);
   const [imageKey, setImageKey] = React.useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
 
   const touchStartX = React.useRef<number | null>(null);
   const closeButtonRef = React.useRef<HTMLButtonElement>(null);
-  const prefersReducedMotion = React.useRef(false);
 
   // Check prefers-reduced-motion
   React.useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    prefersReducedMotion.current = mq.matches;
+    const frame = requestAnimationFrame(() => setPrefersReducedMotion(mq.matches));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   // Fade in on mount
@@ -79,18 +80,18 @@ export function GalleryLightbox({
     return () => window.removeEventListener("keydown", handleKeyDown);
   });
 
-  const handleClose = () => {
-    if (prefersReducedMotion.current) {
+  function handleClose() {
+    if (prefersReducedMotion) {
       onClose();
       return;
     }
     setIsVisible(false);
     setTimeout(onClose, 300);
-  };
+  }
 
   const navigateTo = (newIndex: number) => {
     if (isImageTransitioning) return;
-    if (prefersReducedMotion.current) {
+    if (prefersReducedMotion) {
       setCurrentIndex(newIndex);
       setImageKey((k) => k + 1);
       return;
@@ -103,15 +104,15 @@ export function GalleryLightbox({
     }, 150);
   };
 
-  const goToPrev = () => {
+  function goToPrev() {
     const prev = (currentIndex - 1 + photos.length) % photos.length;
     navigateTo(prev);
-  };
+  }
 
-  const goToNext = () => {
+  function goToNext() {
     const next = (currentIndex + 1) % photos.length;
     navigateTo(next);
-  };
+  }
 
   // Touch / swipe
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -133,7 +134,7 @@ export function GalleryLightbox({
 
   const overlayStyle: React.CSSProperties = {
     opacity: isVisible ? 1 : 0,
-    transition: prefersReducedMotion.current
+    transition: prefersReducedMotion
       ? "none"
       : "opacity 0.3s ease",
   };
@@ -141,7 +142,7 @@ export function GalleryLightbox({
   const imageWrapperStyle: React.CSSProperties = {
     opacity: isImageTransitioning ? 0 : 1,
     transform: isImageTransitioning ? "scale(0.97)" : "scale(1)",
-    transition: prefersReducedMotion.current
+    transition: prefersReducedMotion
       ? "none"
       : "opacity 0.15s ease, transform 0.15s ease",
   };
@@ -149,7 +150,7 @@ export function GalleryLightbox({
   const contentStyle: React.CSSProperties = {
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? "scale(1)" : "scale(0.96)",
-    transition: prefersReducedMotion.current
+    transition: prefersReducedMotion
       ? "none"
       : "opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s",
   };

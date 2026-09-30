@@ -83,8 +83,8 @@ export function EventsCarousel({ events, onActiveChange }: EventsCarouselProps) 
   const [pos, setPos] = React.useState(() => total);
   const [slot, setSlot] = React.useState(0);
   const [inner, setInner] = React.useState(0);
-  const [activeIndex, setActiveIndex] = React.useState(0);
   const [dragging, setDragging] = React.useState(false);
+  const activeIndex = eventIndexOf(slides[pos]?.id ?? "", events);
 
   /* Two motion values, deliberately NOT shared.
      `trackX` is the absolute slot offset and is only ever written by
@@ -142,7 +142,6 @@ export function EventsCarousel({ events, onActiveChange }: EventsCarouselProps) 
   React.useEffect(() => {
     const event = slides[pos];
     if (!event) return;
-    setActiveIndex(eventIndexOf(event.id, events));
     onActiveChange?.(event);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pos]);
